@@ -26,6 +26,8 @@ library(MASS)
 
 ## Sampling with replacement
 
+### Sampling distribution for $\bar X$
+
 ```{r, echo=FALSE}
 samples_w <- expand.grid(Draw1 = 1:6, Draw2 = 1:6)
 sample_w_means <- apply(X = samples_w, MARGIN = 1, FUN = mean)
@@ -51,6 +53,8 @@ var_Xbar_w <- sum(means_w^2*samplingdist_mean_w)-(mean_Xbar_w)^2
 var_Xbar_w
 ```
 
+### Sampling distribution for $S^2$
+
 **What is the mean of the sampling distribution for $S^2$?**
 
 ```{r with-ans3}
@@ -60,6 +64,8 @@ mean_S2_w
 ```
 
 ## Sampling without replacement
+
+### Sampling distribution of $\bar X$
 
 ```{r, echo=FALSE}
 samples_wo <- srs(popvalues = 1:6, n = 2)
@@ -88,6 +94,8 @@ var_Xbar_wo <- sum(means_wo^2*samplingdist_mean_wo)-(mean_Xbar_wo)^2
 var_Xbar_wo
 ```
 
+### Sampling distribution of $S^2$
+
 **What is the expected value of the sampling distribution for $S^2$, when sampling without replacement?**
 
 ```{r wo-ans3}
@@ -95,6 +103,41 @@ vars_wo <- unique(samples_wo$Variance)
 mean_S2_wo <- sum(vars_wo*samplingdist_var_wo)
 mean_S2_wo
 ```
+
+# Functions
+
+## Probability functions
+
+**Choose the correct function and complete the code for the following scenarios.**
+
+* You want to construct a 90% confidence interval so need to know the 95^th^ quantile of the standard normal distribution.
+
+```{r func-ans1.2, eval=FALSE}
+qnorm(p = 0.95, mean = 0, sd = 1)
+```
+
+* How would you find the value of $x$ such that $\mathbb{P}(X\leq x)=0.45$, where $X\sim N(100,\,4^2)$?
+
+```{r func-ans1.3, eval=FALSE}
+qnorm(p = 0.45, mean = 100, sd = 4)
+```
+
+* You want to know the proportion of the $N(0,\,2^2)$ distribution that lies below -2. That is, $\mathbb{P}(X\leq -2)$, where $X\sim N(0,\,2^2)$.
+
+```{r func-ans1.4, eval=FALSE}
+pnorm(q = -2, mean = 0, sd = 2)
+```
+
+## Creating functions
+
+
+
+
+
+
+
+
+
 
 
 

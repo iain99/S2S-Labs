@@ -60,7 +60,7 @@ Using the `str()` function shows us that `schools` is saved as an integer variab
 str(education)
 ```
 
-**Write some code to change the variables `year` and `level` in `education` to be factor variables.**
+**Complete the code to change the variables `year` and `level` in `education` to be factor variables.**
 
 ```{r data-ans3}
 education$year <- factor(x = education$year,
@@ -99,7 +99,7 @@ education[!is.na(education$teachers), ]
 sort(education$pupils, decreasing = TRUE)[1]
 ```
 
-**Write code to sort the observations from `education` in decreasing order of the number of pupils.**
+**Complete the code to sort the observations from `education` in decreasing order of the number of pupils.**
 
 We need to include the argument `decreasing = TRUE` within the function `order()` so that the observations are ordered from largest number of pupils to the smallest number of pupils. We can use the `order()` function within square brackets to show all variables in the data frame in order of decreasing number of pupils.
 
@@ -133,7 +133,7 @@ subset(x = education,
        select = schools)
 ```
 
-## Sumamrising data
+## Summarising data
 
 **What is the mean total number of teachers in primary schools across all years?**
 
@@ -155,9 +155,19 @@ $$\mbox{ratio}=\textstyle\frac{\mbox{puils}}{\mbox{teachers}}$$
 education$ratio <- education$pupils/education$teachers
 ```
 
-## Merging data frames
+\newpage
 
-**The file *class.csv* contains information on the average primary class size in the years 2016 - 2022. Read this file into R and save it as a data frame called `class`.**
+# Appendices
+
+## Appendix A - `cut()`
+
+## Appendix B - Merging data frames
+
+**The file *class.csv* contains information on the average primary class size in the years 2016 - 2022. You can read this file into R and save it as a data frame called `class` using the following code.**
+
+```{r data-ans12.2, eval=FALSE}
+class <- read.csv(file = "class.csv")
+```
 
 **Merge the information from the data frames `education` and `class` together into a new data frame called `primary`, showing all variables from `education` and the average class size for primary schools only. Look carefully at which row names these two data frames have in common.**
 
@@ -166,116 +176,14 @@ class <- read.csv(file = "class.csv", fileEncoding = 'UTF-8-BOM')
 primary <- merge(x = education, y = class, by = c("year", "level"), all.y = TRUE)
 ```
 
-To read the file *class.csv* in to R, we can use the following code.
-```{r data-ans12.2, eval=FALSE}
-class <- read.csv(file = "class.csv")
-```
-
 In order to merge the two data frames, we want to use the function `merge()`. The data frame we provide to the argument `x =` is `education` and the data frame for the `y =` argument is `class`. 
 
 Because we want to match up the rows with the same year and the same level of education, we need to give the argument `by =` a vector of these two variables. We can use the argument `by =`, rather than `by.x =` and `by.y =`, because the columns have the same names in both data frames.
 
 Finally, since we only want to show the rows for primary schools, we can specify `all.y =TRUE`. This will keep all the rows from the second data frame, `class`, and delete the rows from the first data frame which don't have a matching row in the second. For example, because there is no information on the average class size in secondary schools in 2016 in `class`, this row from `education` will not appear in `primary`.
 
-```{r data-ans12.3, eval=FALSE}
-primary <- merge(x = education, y = class, by = c("year", "level"), all.y = TRUE)
+```{r data-ans12.3, eval = TRUE}
+primary <- merge(x = education, y = class, by = c("year", "level"), 
+                 all.y = TRUE)
 primary
 ```
-
-```{r data-ans12.4, echo=FALSE}
-primary
-```
-
-# Functions
-
-## Probability functions
-
-**Choose the correct function and complete the code for the following scenarios.**
-
-* You want to construct a 90% confidence interval so need to know the 95^th^ quantile of the standard normal distribution.
-
-```{r func-ans1.2, eval=FALSE}
-qnorm(p = 0.95, mean = 0, sd = 1)
-```
-
-* How would you find the value of $x$ such that $\mathbb{P}(X\leq x)=0.45$, where $X\sim N(100,\,4^2)$?
-
-```{r func-ans1.3, eval=FALSE}
-qnorm(p = 0.45, mean = 100, sd = 4)
-```
-
-* You want to know the proportion of the $N(0,\,2^2)$ distribution that lies below -2. That is, $\mathbb{P}(X\leq -2)$, where $X\sim N(0,\,2^2)$.
-
-```{r func-ans1.4, eval=FALSE}
-pnorm(q = -2, mean = 0, sd = 2)
-```
-
-## Flow control
-
-**Complete the following code to sum together the numbers 1 to 12.**
-
-We start by creating the vector `sum` to which each value 1, 2, ..., 12 can be added. Initially it needs to take the value 0.
-
-Within the function `for()`, we want `i` to, in turn, take each value 1, 2, ..., 12, so we need to provide a vector of these values (`1:12`). `sum` should then be updated each time `i` takes a new value, by adding it on to the old value of `sum`.
-
-```{r func-ans2}
-sum <- 0
-
-for(i in 1:12){
-  sum <- sum + i
-}
-```
-
-This for loop starts with `sum` having the value 0. It will first assign 1 to `i` and execute the code `sum <- 0 + 1`, meaning `sum` now has the value 1.
-
-* `i` will then be updated to take the value 2 and the for loop will run the code `sum <- 1 + 2` i.e. `sum` has the value 3.
-
-* `i` will then be updated to take the value 3 and the for loop will run the code `sum <- 3 + 3` i.e. `sum` has the value 6.
-
-* $\vdots$
-
-This repeats until finally `i` is assigned the value 12 and the for loop updates `sum` for the last time.
-
-**Using the above code, what is the value of $1+2+3+...+12$?**
-
-```{r func-ans3}
-sum <- 0
-
-for(i in 1:12){
-  sum <- sum + i
-}
-
-sum
-```
-
-Running the code above updates `sum` several times until it takes the value 78. Therefore the value of $1+2+3+...+12=78$.
-
-**What would the value of `y` be after running the following if statement? Try to answer without running the code yourself.**
-
-```{r func-ans4}
-x <- -4
-
-if(x > 0){
-  y <- x^2
-} else {
-  y <- -(x^2)
-}
-```
-
-Running the code above updates the value of `y` to be -16.
-
-## Creating functions
-
-
-
-
-
-
-
-
-
-
-
-
-
-

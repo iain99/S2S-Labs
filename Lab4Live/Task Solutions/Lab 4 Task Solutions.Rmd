@@ -91,11 +91,20 @@ table(TITANIC3$pclass, TITANIC3$survived)
 
 181
 
-**Create a barplot showing the proportion of passengers in each class who survived and the proportion who did not.**
+**Create the following barplot showing the proportion of passengers in each class who survived and the proportion who did not.**
 
-**Make sure the bars are side-by-side, and that the "class" variable is shown along the x-axis.**
+```{r qual-ans7.1, echo=FALSE, out.width='60%', fig.align='center'}
+surv_prop <- prop.table(table(TITANIC3$pclass, TITANIC3$survived), margin = 1)
 
-```{r qual-ans7, out.width='60%', fig.align='center'}
+barplot(height = t(surv_prop),
+        legend.text = TRUE,
+        beside = TRUE,
+        main = "Proportion of Passengers Surviving the Titanic Sinking in each Class",
+        xlab = "Class",
+        ylab = "Proportion")
+```
+
+```{r qual-ans7.2, eval=FALSE}
 surv_prop <- prop.table(table(TITANIC3$pclass, TITANIC3$survived), margin = 1)
 
 barplot(height = t(surv_prop),
@@ -113,21 +122,6 @@ barplot(height = t(surv_prop),
 **How would you describe the shape of the distribution of patients' weights?**
 
 Right-skewed
-
-## Strip Charts
-
-**Complete the code below to create a stripchart showing the distribution of passenger ages in each class on board the Titanic.**
-
-```{r quant-ans2, fig.height=5, out.width='60%', fig.align='center'}
-stripchart(x = age ~ pclass,
-           data = TITANIC3,
-           method = "stack",
-           pch = 20,
-           col = c("gray32", "gray95", "seashell3"),
-           main = "Ages of Passenegers on the Titanic",
-           xlab = "Age",
-           ylab = "Class")
-```
 
 ## Histograms
 
@@ -200,7 +194,10 @@ qqline(y = age_survived$age)
 
 No
 
-# ggplot2
+\newpage
+
+# Appendices
+# Appendix A - `ggplot2`
 
 ## Barplots
 
@@ -224,9 +221,16 @@ ggplot(data = TITANIC3) +
 
 ## Histograms
 
-**Create a histogram, using ggplot2, showing the ages of all passengers on the Titanic. Label your plot appropriately and consider using different binwidths to explore the shape of the distribution.**
+**Complete the code to create a histogram, using `ggplot2`, showing the ages of all passengers on the Titanic.**
 
-```{r gg-ans2, warning=FALSE, fig.align='center', out.width='60%'}
+```{r gg-ans2.1, echo=FALSE, warning=FALSE, fig.align='center', out.width='60%'}
+ggplot(data = TITANIC3) +
+  geom_histogram(aes(x = age), binwidth = 10) +
+  labs(title = "Ages of Passengers on the Titanic",
+       x = "Age", y = "Frequency")
+```
+
+```{r gg-ans2.2, eval=FALSE}
 ggplot(data = TITANIC3) +
   geom_histogram(aes(x = age), binwidth = 10) +
   labs(title = "Ages of Passengers on the Titanic",

@@ -21,7 +21,7 @@ library(PASWR2)
 
 ## Matrices
 
-### Creating Matrices {-}
+### Creating Matrices {.unnumbered}
 
 **Use the `array()` function and the `letters` vector to create a 5 $\times$ 5 matrix containing the letters of the alphabet in column-major order, up to "y".**
 
@@ -39,7 +39,9 @@ Here, we have to use both `nrow =` and `ncol =` to force the matrix to be 5 $\ti
 
 This is why we also see the warning telling us that the length of `letters` is not a multiple of 5.
 
-### Naming rows and columns {-}
+\newpage
+
+### Naming rows and columns {.unnumbered}
 
 ```{r mat7, echo=FALSE}
 data <- c(5033, 4899, 4683, 6852, 6548, 6553, 2402, 2337, 2260, 1493, 1488, 1417)
@@ -78,9 +80,7 @@ births[2, c("2017", "2018", "2019")]
 births["Glasgow", ]
 ```
 
-### Dimension reduction
-
-### Calculating Statistics
+### Calculating Statistics {.unnumbered}
 
 **What is the standard deviation for the number of births in 2019?**
 
@@ -92,9 +92,8 @@ apply(X = births, MARGIN = 2, FUN = sd)
 
 It is then easy to see that the standard deviation for 2019 is `r round(apply(X = births, MARGIN = 2, FUN = sd)[3], 3)`.
 
-### Vector/Matric Multiplication {-}
-
 \newpage
+
 ## Factors
 
 ```{r surveysetup, echo=FALSE}
@@ -138,6 +137,8 @@ performance <- data.frame(percentage, grade, pass,
                           stringsAsFactors = TRUE, row.names = ids)
 ```
 
+### Extracting elements {.unnumbered}
+
 **Write code to extract only the percentage and the associated grade for the student with ID `ST014`?**
 
 There are many different ways we could specify the elements we want to extract. Any of the following lines of code will return the same output.
@@ -156,6 +157,8 @@ performance[2, -3]
 ```{r dfans1.2, echo=FALSE}
 performance["ST014", c("percentage", "grade")]
 ```
+
+### Using packages {.unnumbered}
 
 **The package `PASWR2` contains a data set called `WAIT`. What do the wait times saved in this data set relate to?**
 
@@ -178,5 +181,3 @@ To then load the data frame into our **Environment** tab, we use the function `d
 ```{r dfans2.4}
 data("WAIT")
 ```
-
-## Lists
